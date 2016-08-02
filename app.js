@@ -22,15 +22,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-/*
 app.use('/', routes);
 app.use('/users', users);
-*/
-
-app.get('/', function(req, res, next) {
-  //res.render('index', { title: 'Express' });
-  res.send("Hello world !!");
-});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

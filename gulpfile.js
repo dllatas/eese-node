@@ -1,35 +1,37 @@
 var gulp = require('gulp');
+var browserSync = require('browser-sync');
+var reload = browserSync.reload;
 var nodemon = require('gulp-nodemon');
-var browserSync = require('browser-sync').create();
-
 
 gulp.task('default', ['browser-sync'], function () {
-    gulp.watch('./', browserSync.reload());
+  gulp.watch(['public/*.html'], reload);
 });
 
-gulp.task('browser-sync', ['nodemon'], function () {
-    browserSync.init({
-        server: {
-            baseDir: "./"
-        }
-    });
+gulp.task('browser-sync', ['nodemon'], function() {
+  browserSync({
+    proxy: "localhost:3000",  // local node app address
+    port: 5000,  // use *different* port than above
+    notify: true
+  });
 });
 
 gulp.task('nodemon', function(cb) {
-    var started = false;
+    var called = false;
     return nodemon({
-        script: 'app.js', // ./bin/www
-        ext: 'js'
-    }).on('start', function() {
-        if(!started) {
+        script: 'bin/www'
+        , ignore: [
+            'gulpfile.js',
+            'node_modules/'
+        ]
+        //, tasks: ['default']
+    }).on('start', function () {
+        if (!called) {
+            called = true;
             cb();
-            started = true;
         }
-    }).on('crash', function() {
-        console.log("crash");
     }).on('restart', function() {
-        console.log("restart");
-    }).once('quit', function() {
-        process.exit;
+        setTimeout(function () {
+            reload({ stream:false });
+        }, 1000);
     });
 });
