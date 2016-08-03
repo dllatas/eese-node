@@ -6,9 +6,14 @@ var ReactDOMServer = require('react-dom/server');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    var imageILO = React.createElement('img', {src: "images/ilo.png", className: "img-responsive"}),
+        imageACTEMP = React.createElement('img', {src: "images/actemp.png", className: "img-responsive pull-right css-index-footer-right"}),
+        divLeft6 = React.createElement('div', {className: "col-lg-6 text-left"}, imageILO),
+        divRight6 = React.createElement('div', {className: "col-lg-6 text-right"}, imageACTEMP),
+        footer = React.createElement('div', {className: "container css-index-footer"}, divLeft6, divRight6);
+
     res.render('home', {
-        title: 'Soda Stereo'
-        , subtitle: 'Gustavo Cerati'
+        footer: ReactDOMServer.renderToString(footer)
     });
 });
 
