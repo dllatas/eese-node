@@ -17,9 +17,9 @@ router.get('/about', function(req, res, next) {
 });
 
 /* GET about */
-router.get('/about', function(req,res, next) {
+router.get('/hello', function(req,res, next) {
     var element = React.createElement('div', null, 'Hello World!');
-    res.render('about', {
+    res.render('hello', {
         about: ReactDOMServer.renderToString(element)
     });
 });

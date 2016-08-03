@@ -6,3 +6,50 @@ body {
 a {
   color: #00B7FF;
 }
+
+.css-body-index {
+    background-color: #ECECEC;
+    padding-top: 0px;
+    padding-bottom: 20px;
+}
+
+.css-header-page-img {
+    -webkit-filter: brightness(0.65);
+    filter: brightness(0.65);
+}
+
+.css-index-box {
+    box-shadow: 0px 0px 5px 0px #9C9C9C;
+    background-color: white;
+}
+
+.virtualTourTitle1 {
+    color: #48B2D9;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 1.5em;
+    margin-left: 15%;
+}
+
+.virtualTourTitle2 {
+    color: #48B2D9;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 1.2em;
+    margin-left: 15%;
+}
+
+.css-index-footer {
+    background-image: url("../images/footer.png");
+    margin-top: 10px;
+    background-size: 100% 100%;
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+.jumbotron {
+    background-image: url("../images/header.jpg");
+    margin-bottom: 15px;
+}
