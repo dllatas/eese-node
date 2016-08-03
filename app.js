@@ -10,9 +10,12 @@ var users = require('./routes/users');
 
 var app = express();
 
+var exphbs = require('express-handlebars');
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+app.set('view engine', 'handlebars');
+//app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

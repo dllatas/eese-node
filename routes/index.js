@@ -6,12 +6,15 @@ var ReactDOMServer = require('react-dom/server');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', {
-        title: 'Hola'
-        , subtitle: 'BOUNCE'
+    res.render('home', {
+        title: 'Soda Stereo'
+        , subtitle: 'Gustavo Cerati'
     });
 });
 
+router.get('/about', function(req, res, next) {
+    res.render('june');
+});
 
 /* GET about */
 router.get('/about', function(req,res, next) {
