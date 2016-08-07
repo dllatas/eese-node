@@ -72,7 +72,7 @@ var Text5 = React.createClass({
 var SpanMenu = React.createClass({
     render: function() {
         return (
-            <span className='glyphicon glyphicon-menu-right' ariaHidden='true' />
+            <span className='glyphicon glyphicon-menu-right' aria-hidden='true' />
         );
     }
 });
@@ -107,7 +107,7 @@ var DivRight = React.createClass({
 var SpanMenuDown = React.createClass({
     render: function() {
         return (
-            <span className='glyphicon glyphicon-menu-down' ariaHidden='true' />
+            <span className='glyphicon glyphicon-menu-down' aria-hidden='true' />
         );
     }
 });

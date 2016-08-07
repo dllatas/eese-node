@@ -58,7 +58,7 @@ var SignInBtn = React.createClass({
 var RecoverSpan = React.createClass({
     render: function() {
         return (
-            <span className='glyphicon glyphicon-lock' ariaHidden='true'></span>
+            <span className='glyphicon glyphicon-lock' aria-hidden='true'></span>
         );
     }
 });
@@ -66,7 +66,7 @@ var RecoverSpan = React.createClass({
 var RecoverBtn = React.createClass({
     render: function() {
         return (
-            <button id='recoverPass' type='button' className='btn btn-info' ariaLabel='Recover Password'>
+            <button id='recoverPass' type='button' className='btn btn-info' aria-label='Recover Password'>
                 <RecoverSpan />
             </button>
         );
@@ -116,7 +116,7 @@ var BtnNavToggle = React.createClass({
     render: function() {
         return (
             <button type="button" className="navbar-toggle collapsed"
-            dataToggle="collapse" dataTarget="#navbar" ariaExpanded="false" ariaControls="navbar">
+            data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <SpanSR /><SpanIcon /><SpanIcon /><SpanIcon />
             </button>
         );

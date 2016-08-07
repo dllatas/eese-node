@@ -99,7 +99,7 @@ var SpanMenu = React.createClass({
     displayName: "SpanMenu",
 
     render: function render() {
-        return React.createElement("span", { className: "glyphicon glyphicon-menu-right", ariaHidden: "true" });
+        return React.createElement("span", { className: "glyphicon glyphicon-menu-right", "aria-hidden": "true" });
     }
 });
 
@@ -144,7 +144,7 @@ var SpanMenuDown = React.createClass({
     displayName: "SpanMenuDown",
 
     render: function render() {
-        return React.createElement("span", { className: "glyphicon glyphicon-menu-down", ariaHidden: "true" });
+        return React.createElement("span", { className: "glyphicon glyphicon-menu-down", "aria-hidden": "true" });
     }
 });
 
