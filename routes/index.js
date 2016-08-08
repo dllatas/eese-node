@@ -4,6 +4,11 @@ var React = require('react');
 var ReactDOMServer = require('react-dom/server');
 var request = require("request");
 
+/* Redis */
+var redis = require("redis"),
+  client = redis.createClient();
+
+
 /* Components */
 var Footer = React.createFactory(require('../views/footer.js'));
 var Jumbotron = React.createFactory(require('../views/jumbotron.js'));
@@ -29,6 +34,21 @@ router.get('/context', function(req, res, next) {
             //res.render(body);
             console.log(body);
     });
-})
+});
+
+router.get('/learn', function(req, res, next){
+    request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+            body = JSON.parse(body);
+            console.log(body.table);
+            console.log(body.data);
+            /* Redis code */
+            client.set(body.table, JSON.stringify(body.data));
+            console.log("REDIS och shit");
+            client.get(body.table, function(err, reply) {
+                console.log(JSON.parse(reply));
+            });
+    });
+});
 
 module.exports = router;

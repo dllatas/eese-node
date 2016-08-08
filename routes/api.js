@@ -19,9 +19,7 @@ connection.connect();
 router.get('/context', function(req, res, next) {
     connection.query("SELECT * FROM context", function(err, rows, fields) {
         if (err) throw err;
-        //res.render(rows.map(printData));
-        //res.json({"Error" : false, "Message" : "Success", "Users" : rows.map(printData)});
-        res.json(rows);
+        res.json({"table" : fields[0].table, "data" : rows});
         connection.end();
     });
 });
@@ -30,13 +28,13 @@ router.get("/context/:id", function(req, res, next){
     var query = "SELECT * FROM ?? WHERE ?? = ?";
     var table = ["context", "id", req.params.id];
     query = mysql.format(query, table);
-    console.log(query);
-    connection.query(query,function(err,rows){
+    connection.query(query,function(err, rows, fields) {
         if(err) {
             res.json({"Error" : true, "Message" : "Error executing MySQL query"});
         } else {
-            res.json(rows);
+            res.json({"table" : fields[0].table, "data" : rows});
         }
+        connection.end();
     });
 });
 
