@@ -9,10 +9,6 @@ var connection = mysql.createConnection({
   database : 'eese'
 });
 
-function printData(item,index) {
-    return [item.id,item.name,item.abbreviation].join(" ");
-}
-
 connection.connect();
 
 /* DB API */
@@ -28,12 +24,9 @@ router.get("/context/:id", function(req, res, next){
     var query = "SELECT * FROM ?? WHERE ?? = ?";
     var table = ["context", "id", req.params.id];
     query = mysql.format(query, table);
-    connection.query(query,function(err, rows, fields) {
-        if(err) {
-            res.json({"Error" : true, "Message" : "Error executing MySQL query"});
-        } else {
-            res.json({"table" : fields[0].table, "data" : rows});
-        }
+    connection.query(query, function(err, rows, fields) {
+        if (err) throw err;
+        res.json({"table" : fields[0].table, "data" : rows});
         connection.end();
     });
 });
@@ -42,13 +35,10 @@ router.post("/context", function(req, res, next){
     var query = "INSERT INTO ??(??, ??) VALUES (?, ?)";
     var table = ["context", "name", "abbreviation", req.body.name, req.body.abbreviation];
     query = mysql.format(query, table);
-    console.log(query);
     connection.query(query, function(err, rows){
-        if(err) {
-            res.json({"Error" : true, "Message" : "Error executing MySQL query"});
-        } else {
-            res.json({"Error" : false, "Message" : "Context added !"});
-        }
+        if (err) throw err;
+        res.json({"Message" : "Context added !"});
+        connection.end();
     });
 });
 
@@ -57,11 +47,9 @@ router.delete("/context/:id", function(req, res, next) {
     var table = ["context", "id", req.params.id];
     query = mysql.format(query, table);
     connection.query(query, function(err, rows){
-        if(err) {
-            res.json({"Error" : true, "Message" : "Error executing MySQL query"});
-        } else {
-            res.json({"Error" : false, "Message" : "Deleted context with id " + req.params.id});
-        }
+        if (err) throw err;
+        res.json({"Message" : "Deleted context with id " + req.params.id});
+        connection.end();
     });
 });
 

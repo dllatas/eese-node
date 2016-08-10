@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 var React = require('react');
 var ReactDOMServer = require('react-dom/server');
-var request = require("request");
+var request = require('request');
 
 /* Redis */
-var redis = require("redis"),
+var redis = require('redis'),
   client = redis.createClient();
 
 
@@ -14,6 +14,8 @@ var Footer = React.createFactory(require('../views/footer.js'));
 var Jumbotron = React.createFactory(require('../views/jumbotron.js'));
 var Tutorial = React.createFactory(require('../views/tutorial.js'));
 var Navigation = React.createFactory(require('../views/navigation.js'));
+
+var Context = React.createFactory(require('../views/context.js'));
 
 /* Home page */
 router.get('/', function(req, res, next) {
@@ -37,17 +39,12 @@ router.get('/context', function(req, res, next) {
 });
 
 router.get('/learn', function(req, res, next){
-    request(options, function (error, response, body) {
-        if (error) throw new Error(error);
-            body = JSON.parse(body);
-            console.log(body.table);
-            console.log(body.data);
-            /* Redis code */
-            client.set(body.table, JSON.stringify(body.data));
-            console.log("REDIS och shit");
-            client.get(body.table, function(err, reply) {
-                console.log(JSON.parse(reply));
-            });
+    client.get('context', function(err, reply) {
+        res.render('context', {
+            context: ReactDOMServer.renderToString(Context({ data: JSON.parse(reply)}))
+            , contextSlave: ReactDOMServer.renderToString(Context({ data: JSON.parse(reply)}))
+            , layout: 'test.handlebars'
+        });
     });
 });
 

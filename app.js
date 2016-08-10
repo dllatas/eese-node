@@ -4,6 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var request = require('request');
+/*Redis code*/
+/* Redis */
+var redis = require('redis'),
+  client = redis.createClient();
+
+
 
 var routes = require('./routes/index');
 var api = require('./routes/api');
@@ -29,6 +36,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/api', api);
+
+// Load initial data into Redis
+var options = { method: 'GET',
+    url: 'http://localhost:3000/api/context' };
+
+request(options, function (error, response, body) {
+    /* Redis code */
+    /* The following line should be executed only once at the beginning of the server*/
+    if (error) throw new Error(error);
+    body = JSON.parse(body);
+    client.set(body.table, JSON.stringify(body.data));
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
