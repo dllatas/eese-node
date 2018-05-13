@@ -16,6 +16,7 @@ var Tutorial = React.createFactory(require('../views/tutorial.js'));
 var Navigation = React.createFactory(require('../views/navigation.js'));
 
 var Context = React.createFactory(require('../views/context.js'));
+var Pillar = React.createFactory(require('../views/pillar.js'));
 
 /* Home page */
 router.get('/', function(req, res, next) {
@@ -42,7 +43,7 @@ router.get('/learn', function(req, res, next){
     client.get('context', function(err, reply) {
         res.render('context', {
             context: ReactDOMServer.renderToString(Context({ data: JSON.parse(reply)}))
-            , contextSlave: ReactDOMServer.renderToString(Context({ data: JSON.parse(reply)}))
+            , pillar: ReactDOMServer.renderToString(Pillar({ data: JSON.parse(reply) , value: 2 }))
             , layout: 'test.handlebars'
         });
     });

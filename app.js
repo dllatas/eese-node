@@ -10,8 +10,7 @@ var request = require('request');
 var redis = require('redis'),
   client = redis.createClient();
 
-
-
+/* Routing */
 var routes = require('./routes/index');
 var api = require('./routes/api');
 var users = require('./routes/users');

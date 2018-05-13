@@ -2,8 +2,8 @@
 
 var React = require('react');
 
-var ContextOption = React.createClass({
-    displayName: 'ContextOption',
+var PillarOption = React.createClass({
+    displayName: 'PillarOption',
 
     render: function render() {
         return React.createElement(
@@ -14,23 +14,25 @@ var ContextOption = React.createClass({
     }
 });
 
-var ContextSelect = React.createClass({
-    displayName: 'ContextSelect',
+var PillarSelect = React.createClass({
+    displayName: 'PillarSelect',
 
     getInitialState: function getInitialState() {
         return { data: this.props.data };
     },
     render: function render() {
         var that = this;
-        var ContextNodes = this.props.data.map(function (item, index) {
-            return React.createElement(ContextOption, { key: item.id, value: item.id, text: item.name });
+        var PillarNodes = this.props.data.map(function (item, index) {
+            if (item.id === that.props.value) {
+                return React.createElement(PillarOption, { key: item.id, value: item.id, text: item.name });
+            }
         });
         return React.createElement(
             'select',
-            null,
-            ContextNodes
+            { multiple: true },
+            PillarNodes
         );
     }
 });
 
-module.exports = ContextSelect;
+module.exports = PillarSelect;
